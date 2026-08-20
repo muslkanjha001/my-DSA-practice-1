@@ -1,105 +1,48 @@
-import java.util.*;
-
-class Linklist{
-     public static class Node{
+class Linklist {
+     static class Node {
         int data;
         Node next;
-        public Node(int data){
-            this.data = data;
-            this.next = null;
-
+        Node(int d){
+            data = d;
+            next = null;
         }
-     }
-     public static Node head;
-     public static Node tail;
-     public void addFirst(int data){
-          Node newNode = new Node(data);
-         if(head == null){
-            head = tail = newNode;
-            return;
-              
-         
-        }
-
-        newNode.next = head;
-        head = newNode;
-     }
-     public void addLast(int data){
-       Node  newNode = new Node(data);
-       if(head==null){
-        head = tail = newNode;
-         return;
-       }
-       tail.next = newNode;
-       tail = newNode;
-     }
-     public  void print() {
-        if(head == null){
-            System.out.println("ll is empty");
-            return;
-        }
-        Node temp = head;
-        while(temp != null){
-            System.out.print(temp.data+"--> ");
-            temp = temp.next;
-        }
-        System.out.println();
     }
-    public void add(int idx, int data ){
-        if(idx == 0){
-            addFirst(data);
-            return;
-        }
-        Node newNode = new Node(data);
-        Node temp = head;
-        int i =0;
-        while(i<idx-1){
-             temp = temp.next; 
-             i++;
-            }
-            newNode.next = temp.next;
-            temp.next = newNode;
-        }
-         public int itrSearch(int key){
-            Node temp = head;
-            int  i = 0;
-            while(temp!=null){
-                if(temp.data == key){
-                     return i;
-                    }
+    public Node getIntersectionNode(Node head1, Node head2){
+        while (head2 != null) {
+            Node temp = head1;
+            while (temp != null) {
+                if (temp == head2) {
+                    return head2;
+                }
                 temp = temp.next;
-                i++;
-
             }
-            return -1;
+            head2 = head2.next;
         }
-
-        
-         
-
-    
-
-
-
-        
-    
-    
-    
-
-
-     
-     public static void main(String args[]) {
-        Linklist ll  = new Linklist();
-        ll.addFirst(2);
-        ll.addFirst(1);
-        ll.addLast(4);
-        ll.addLast(5);
-        ll.add(3,9 );
-         
-        System.out.println(ll.itrSearch(9));
-        System.out.println(ll.itrSearch(10));
+        return null;
+    }
+    public static void main(String[] args) {
+        Linklist list = new Linklist();
+        Node head1, head2;
+        head1 = new Node(4);
+        head2 = new Node(5);
+        Node newNode = new Node(1);
+        head2.next = newNode;
+        newNode = new Node(2);
+        head2.next.next = newNode;
+        newNode = new Node(6);
+        head1.next = newNode;
+        head2.next.next.next = newNode;
+        newNode = new Node(3);
+        head1.next.next = newNode;head1.next.next.next = null;
+        Node intersectionPoint= list.getIntersectionNode(head1, head2);
+        if (intersectionPoint == null) {
+            System.out.print(" No Intersection Point \n");
+        }
+        else {
+            System.out.print("Intersection Point: "+ intersectionPoint.data);
 
 
+
+}
     }
 }
-
