@@ -1,7 +1,7 @@
  import  java.util.*;
 
  class Greedy9{
-    static class Job{
+    static class job{
         int deadLine;
         int profit;
         int id;// 0(A),1(B),2(C)
